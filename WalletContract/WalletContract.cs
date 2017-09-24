@@ -3,6 +3,13 @@ using Neo.SmartContract.Framework;
 using Neo.SmartContract.Framework.Services.Neo;
 using Neo.SmartContract.Framework.Services.System;
 
+//                  __/___
+//            _____/______|
+//    _______/_____\_______\_____
+//    \              < < <       |
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//     C  H  A  I  N    L  I  N  E
+
 // This contract verifies transactions out of a single Chain Line user's wallet
 // K&R style formatting (https://wikipedia.org/wiki/Indent_style#K.26R)
 
@@ -31,17 +38,6 @@ namespace WalletContract {
       // Current version: 0.4
       [Appcall("4e92ec6e6d116d5e0c4ac351b79bcbc75e08e6b2")]
       public static extern bool HubContract(string operation, params object[] args);
-   }
-
-   public class Utils {
-      public static bool ArraysEqual(byte[] a1, byte[] a2) {
-         if (a1.Length != a2.Length) 
-            return false;
-         for (int i = 0; i < a1.Length; i++)
-            if (a1[i] != a2[i]) 
-               return false;
-         return true;
-      }
    }
 
    public class Contract : SmartContract {
@@ -86,6 +82,17 @@ namespace WalletContract {
          }
 
          return outgoingValue;
+      }
+   }
+   
+   public class Utils {
+      public static bool ArraysEqual(byte[] a1, byte[] a2) {
+         if (a1.Length != a2.Length)
+            return false;
+         for (int i = 0; i < a1.Length; i++)
+            if (a1[i] != a2[i])
+               return false;
+         return true;
       }
    }
 }
