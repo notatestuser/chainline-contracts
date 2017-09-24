@@ -64,12 +64,13 @@ namespace WalletContract {
 
          // We only care about GAS transactions
          // Return out if we encounter non-zero anything else
-         TransactionOutput[] refs = tx.GetReferences();
-         for (var i = 0; i < refs.Length; i++) {
-            if (refs[i].Value == 0) continue;
-            if (! Utils.ArraysEqual(refs[i].AssetId, Constants.GasAssetId))
-               return 0;
-         }
+         // TODO: Revisit; various forms of this are broken for now
+         //TransactionOutput[] refs = tx.GetReferences();
+         //for (var i = 0; i < refs.Length; i++) {
+         //   if (refs[i].Value == 0) continue;
+         //   if (! Utils.ArraysEqual(refs[i].AssetId, Constants.GasAssetId))
+         //      return 0;
+         //}
 
          // Count up the outgoing amount
          BigInteger outgoingValue = 0;
