@@ -11,13 +11,13 @@ using Neo.SmartContract.Framework.Services.System;
 //     C  H  A  I  N    L  I  N  E
 
 // This contract verifies transactions out of a single Chain Line user's wallet
-// K&R style formatting (https://wikipedia.org/wiki/Indent_style#K.26R)
 
 namespace WalletContract {
    public class Constants {
       // The account owner's public key
       // Included in at wallet creation time
       // Converter: https://conv.darkbyte.ru
+      // neowallet_contracts13.db3
       public static readonly byte[] OwnerPubKey = {
          3, 114, 247, 98, 137, 198, 155, 181, 138, 142, 92, 125, 43, 79, 
          21, 38, 234, 139, 38, 192, 131, 178, 169, 88, 194, 30, 188, 3, 25, 
@@ -35,8 +35,9 @@ namespace WalletContract {
 
    public class Externals {
       // Represents the instance of Chain Line's HubContract on the network
-      // Current version: 0.4
-      [Appcall("4e92ec6e6d116d5e0c4ac351b79bcbc75e08e6b2")]
+      // Current version: 0.8 (30a2b04139d714564eb956896498616cf8acc8db)
+      [Appcall(new byte[] { 48, 162, 176, 65, 57, 215, 20, 86, 78, 185, 86,
+         137, 100, 152, 97, 108, 248, 172, 200, 219 })]  // reversed by the compiler
       public static extern bool HubContract(string operation, params object[] args);
    }
 
@@ -47,30 +48,27 @@ namespace WalletContract {
             return false;
 
          // Verify the tx against the wallet owner's pubkey
-         if (! VerifySignature(signature, Constants.OwnerPubKey))
+         byte[] pubKey = Constants.OwnerPubKey;  // makes it appear once in bytecode
+         if (! VerifySignature(signature, pubKey))
             return false;
 
          // Get the tx amount (count the gas in outputs)
-         BigInteger gasTxValue = GetGasTransactionValue(signature);
-
-         return Externals.HubContract("requesttx", gasTxValue);
-      }
-
-      private static BigInteger GetGasTransactionValue(byte[] signature) {
-         byte[] accScriptHash = ExecutionEngine.ExecutingScriptHash;
+         BigInteger txValue = GetTransactionValue(signature);
 
          // Get the withdraw transaction that triggered the contract verification
          Transaction tx = (Transaction)ExecutionEngine.ScriptContainer;
+         TransactionOutput reference = tx.GetReferences()[0];
+         byte[] assetId = reference.AssetId;
 
+         return Externals.HubContract("requesttx", signature, pubKey, assetId, txValue);
+      }
+
+      private static BigInteger GetTransactionValue(byte[] signature) {
+         byte[] accScriptHash = ExecutionEngine.ExecutingScriptHash;
+         Transaction tx = (Transaction)ExecutionEngine.ScriptContainer;
+         
          // We only care about GAS transactions
-         // Return out if we encounter non-zero anything else
-         // TODO: Revisit; various forms of this are broken for now
-         //TransactionOutput[] refs = tx.GetReferences();
-         //for (var i = 0; i < refs.Length; i++) {
-         //   if (refs[i].Value == 0) continue;
-         //   if (! Utils.ArraysEqual(refs[i].AssetId, Constants.GasAssetId))
-         //      return 0;
-         //}
+         // TODO: Check whether asset is GAS
 
          // Count up the outgoing amount
          BigInteger outgoingValue = 0;
