@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
-using Xunit;
-using UtilsTests.Utilities;
-using Neo.VM;
+﻿using Neo;
 using Neo.Cryptography;
+using Neo.VM;
+using UtilsTests.Utilities;
+using Xunit;
 
 namespace UtilsTests {
    public class UnitTest1 {
@@ -12,17 +11,17 @@ namespace UtilsTests {
          byte[] program = ExecutionHelper.Compile("HubContract");
 
          using (ScriptBuilder sb = new ScriptBuilder())
-         using (ExecutionEngine ee = new ExecutionEngine(null, Crypto.Default, null, null)) {
+         using (ExecutionEngine ee = ExecutionHelper.GetExecutionEngine()) {
             ee.LoadScript(program);
 
             sb.EmitPush(new byte[] { 1, 2, 3, 4, 5 });
-            sb.EmitPush("test_arrayreverse");
+            //sb.EmitPush("test_arrayreverse");
 
-            ee.LoadScript(sb.ToArray());
+            ee.LoadScript(sb.ToArray(), false);
             ee.Execute();
 
-            byte[] result = ee.EvaluationStack.Peek().GetByteArray();
-            Assert.Equal(new byte[] { 5, 4, 3, 2, 1 }, result);
+            string result = ee.EvaluationStack.Peek().GetByteArray().ToHexString();
+            Assert.Equal("test", result);
          }
       }
    }

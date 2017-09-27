@@ -1,6 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using Neo;
+using Neo.Core;
+using Neo.Cryptography.ECC;
+using Neo.Implementations.Blockchains.LevelDB;
+using Neo.IO.Caching;
+using Neo.SmartContract;
+using Neo.VM;
 
 namespace UtilsTests.Utilities {
    class ConvertTask {
@@ -57,6 +64,25 @@ namespace UtilsTests.Utilities {
          Console.WriteLine("Using AVM at: " + avmPath);
          
          return File.ReadAllBytes(avmPath);
+      }
+
+      public static ExecutionEngine GetExecutionEngine() {
+         InvocationTransaction tx = new InvocationTransaction();
+         tx.Version = 1;
+         if (tx.Attributes == null) tx.Attributes = new TransactionAttribute[0];
+         if (tx.Inputs == null) tx.Inputs = new CoinReference[0];
+         if (tx.Outputs == null) tx.Outputs = new TransactionOutput[0];
+         if (tx.Scripts == null) tx.Scripts = new Witness[0];
+         Blockchain.RegisterBlockchain(new LevelDBBlockchain("TestDB"));
+         LevelDBBlockchain blockchain = (LevelDBBlockchain)Blockchain.Default;
+         DataCache<UInt160, AccountState> accounts = blockchain.GetTable<UInt160, AccountState>();
+         DataCache<ECPoint, ValidatorState> validators = blockchain.GetTable<ECPoint, ValidatorState>();
+         DataCache<UInt256, AssetState> assets = blockchain.GetTable<UInt256, AssetState>();
+         DataCache<UInt160, ContractState> contracts = blockchain.GetTable<UInt160, ContractState>();
+         DataCache<StorageKey, StorageItem> storages = blockchain.GetTable<StorageKey, StorageItem>();
+         //CachedScriptTable script_table = new CachedScriptTable(contracts);
+         StateMachine service = new StateMachine(accounts, validators, assets, contracts, storages);
+         return new ApplicationEngine(TriggerType.Application, tx, null, service, Fixed8.Zero, true);
       }
    }
 }
