@@ -11,7 +11,7 @@ namespace UtilsTests {
          byte[] program = ExecutionHelper.Compile("HubContract");
 
          using (ScriptBuilder sb = new ScriptBuilder())
-         using (ExecutionEngine ee = ExecutionHelper.GetExecutionEngine()) {
+         using (ExecutionEngine ee = new ExecutionEngine(null, Crypto.Default, null, null)) {
             ee.LoadScript(program);
 
             sb.EmitPush(new byte[] { 1, 2, 3, 4, 5 });
@@ -21,7 +21,7 @@ namespace UtilsTests {
             ee.Execute();
 
             string result = ee.EvaluationStack.Peek().GetByteArray().ToHexString();
-            Assert.Equal("test", result);
+            Assert.Equal("0504030201", result);
          }
       }
    }
