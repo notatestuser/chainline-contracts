@@ -14,11 +14,14 @@ namespace UtilsTests {
          using (ExecutionEngine ee = new ExecutionEngine(null, Crypto.Default, null, null)) {
             ee.LoadScript(program);
 
+            sb.EmitPush(new byte[] { });
             sb.EmitPush(new byte[] { 1, 2, 3, 4, 5 });
             //sb.EmitPush("test_arrayreverse");
 
             ee.LoadScript(sb.ToArray(), false);
             ee.Execute();
+
+            Assert.False(ee.State.HasFlag(VMState.FAULT));
 
             string result = ee.EvaluationStack.Peek().GetByteArray().ToHexString();
             Assert.Equal("0504030201", result);

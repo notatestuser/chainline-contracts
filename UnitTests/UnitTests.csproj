@@ -147,12 +147,6 @@
     <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
     </Reference>
-    <Reference Include="Neo, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Neo.2.2.0\lib\net461\Neo.dll</HintPath>
-    </Reference>
-    <Reference Include="Neo.VM, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Neo.VM.2.0.1\lib\net461\Neo.VM.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -295,6 +289,16 @@
     <Content Include="x86\libleveldb.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\vendor\neo-vm\src\neo-vm\neo-vm.csproj">
+      <Project>{1e4da7c9-1354-4efb-8b3e-02a5545e1463}</Project>
+      <Name>neo-vm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\vendor\neo\neo\neo.csproj">
+      <Project>{25679491-7200-4745-a2d7-560d165b48e7}</Project>
+      <Name>neo</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

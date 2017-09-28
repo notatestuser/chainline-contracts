@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalletContract", "WalletCon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{2E3DF5C2-8A38-4A03-86D7-8D463C917E47}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "neo-vm", "vendor\neo-vm\src\neo-vm\neo-vm.csproj", "{1E4DA7C9-1354-4EFB-8B3E-02A5545E1463}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "neo", "vendor\neo\neo\neo.csproj", "{25679491-7200-4745-A2D7-560D165B48E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{2E3DF5C2-8A38-4A03-86D7-8D463C917E47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E3DF5C2-8A38-4A03-86D7-8D463C917E47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E3DF5C2-8A38-4A03-86D7-8D463C917E47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E4DA7C9-1354-4EFB-8B3E-02A5545E1463}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E4DA7C9-1354-4EFB-8B3E-02A5545E1463}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E4DA7C9-1354-4EFB-8B3E-02A5545E1463}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E4DA7C9-1354-4EFB-8B3E-02A5545E1463}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25679491-7200-4745-A2D7-560D165B48E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25679491-7200-4745-A2D7-560D165B48E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25679491-7200-4745-A2D7-560D165B48E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25679491-7200-4745-A2D7-560D165B48E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
