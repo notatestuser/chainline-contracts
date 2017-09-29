@@ -175,26 +175,22 @@ namespace HubContract {
          //if (! Runtime.CheckWitness(originator)) return false;
 
          // -= Test Entry Points =-
-         switch (operation) {
-            case "test_hash160reverse":
-               return Utils.ReverseHash160(arg0);
-            case "test_sanity_bytearrayeq":
-               return arg0 == arg1;
-            case "test_sanity_bytearrayneq":
-               return arg0 != arg1;
-         }
+         if ("test_hash160reverse" == operation)
+            return Utils.ReverseHash160(arg0);
+         if ("test_sanity_bytearrayeq" == operation)
+            return arg0 == arg1;
+         if ("test_sanity_bytearrayneq" == operation)
+            return arg0 != arg1;
          
          // -= Wallets =-
-         switch (operation) {
-            case "validate":
-               return WalletOperations.ValidateWallet(arg0, arg1);
-            case "getbalance":
-               return WalletOperations.GetBalance(arg0);
-            case "getreserved":
-               return WalletOperations.GetReserved(arg0, arg1);
-            case "requesttx":
-               return WalletOperations.CanTransferOut(arg0, arg1, arg2, arg3);
-         }
+         if ("validate" == operation)
+            return WalletOperations.ValidateWallet(arg0, arg1);
+         if ("getbalance" == operation)
+            return WalletOperations.GetBalance(arg0);
+         if ("getreserved" == operation)
+            return WalletOperations.GetReserved(arg0, arg1);
+         if ("requesttx" == operation)
+            return WalletOperations.CanTransferOut(arg0, arg1, arg2, arg3);
 
          // -= Unsupported Operation! =-
          Events.RaiseException("Unsupported Operation");
