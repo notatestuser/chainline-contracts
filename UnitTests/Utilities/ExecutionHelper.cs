@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace UtilsTests.Utilities {
    class ConvertTask {
@@ -40,9 +42,15 @@ namespace UtilsTests.Utilities {
 #endif
 
       private const string BasePath = "../../../";
+
+      private static Dictionary<string, byte[]> Cache = new Dictionary<string, byte[]>();
       
-      public static byte[] Compile(string projectName)
-      {
+      [MethodImpl(MethodImplOptions.Synchronized)]
+      public static byte[] Compile(string projectName) {
+         if (Cache.ContainsKey(projectName))
+            if (Cache.TryGetValue(projectName, out byte[] cachedBytes))
+               return cachedBytes;
+
          string dllPath = Path.Combine(BasePath, projectName, $@"bin\{Directory}", $"{projectName}.dll");
          string workingDir = Path.GetDirectoryName(dllPath);
          string fullPath = Path.GetFullPath(dllPath);
@@ -55,8 +63,11 @@ namespace UtilsTests.Utilities {
 
          string avmPath = Path.GetFullPath(Path.Combine(workingDir, $"{projectName}.avm"));
          Console.WriteLine("Using AVM at: " + avmPath);
+
+         byte[] bytes = File.ReadAllBytes(avmPath);
+         Cache.Add(projectName, bytes);
          
-         return File.ReadAllBytes(avmPath);
+         return bytes;
       }
    }
 }

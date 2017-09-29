@@ -174,12 +174,14 @@ namespace HubContract {
       public static object Main(string operation, byte[] arg0, byte[] arg1, byte[] arg2, BigInteger arg3) {
          //if (! Runtime.CheckWitness(originator)) return false;
 
-         //Runtime.Notify("BigInteger Size", Constants.BigIntSize());
-
          // -= Test Entry Points =-
          switch (operation) {
             case "test_hash160reverse":
                return Utils.ReverseHash160(arg0);
+            case "test_sanity_bytearrayeq":
+               return arg0 == arg1;
+            case "test_sanity_bytearrayneq":
+               return arg0 != arg1;
          }
          
          // -= Wallets =-
