@@ -133,7 +133,7 @@ namespace HubContract {
       
       public static bool ValidateWallet(byte[] scriptHash, byte[] pubKey, bool doThrow = false) {
          // This is cheaper than the Blockchain.GetContract method of getting the entire script
-         byte[] reversedScriptHash = Utils.ArrayReverse(scriptHash);
+         byte[] reversedScriptHash = Utils.ReverseScriptHash(scriptHash);
          byte[] expectedScript = 
                Constants.WalletScriptP1
                   .Concat(pubKey)
@@ -152,8 +152,7 @@ namespace HubContract {
 
       public static BigInteger GetBalance(byte[] scriptHash) {
          byte[] gasAssetId = Constants.GasAssetId;
-         Account account = Blockchain.GetAccount(
-                              Utils.ArrayReverse(scriptHash));
+         Account account = Blockchain.GetAccount(Utils.ReverseScriptHash(scriptHash));
          return account.GetBalance(gasAssetId);
       }
 
@@ -175,29 +174,28 @@ namespace HubContract {
    }
 
    public class Contract : SmartContract {
-      public static object Main(string operation, params object[] args) {
+      //public static object Main(string operation, params byte[][] args) {
+      public static object Main(string operation, byte[] arg0, byte[] arg1, byte[] arg2, BigInteger arg3) {
          //if (! Runtime.CheckWitness(originator)) return false;
          
          //Runtime.Notify("BigInteger Size", Constants.BigIntSize());
 
          // -= Test Entry Points =-
          switch (operation) {
-            case "test_arrayreverse":
-               //return Utils.ArrayReverse((byte[])args[0]);
-               return new byte[] { 5, 4, 3, 2, 1 };
+            case "test_reversescripthash":
+               return Utils.ReverseScriptHash(arg0);
          }
          
          // -= Wallets =-
          switch (operation) {
             case "validate": 
-               return WalletOperations.ValidateWallet((byte[])args[0], (byte[])args[1]);
+               return WalletOperations.ValidateWallet(arg0, arg1);
             case "getbalance": 
-               return WalletOperations.GetBalance((byte[])args[0]);
+               return WalletOperations.GetBalance(arg0);
             case "getreserved": 
-               return WalletOperations.GetReserved((byte[])args[0], (byte[])args[1]);
+               return WalletOperations.GetReserved(arg0, arg1);
             case "requesttx": 
-               return WalletOperations.CanTransferOut((byte[])args[0], 
-                        (byte[])args[1], (byte[])args[2], (BigInteger)args[3]);
+               return WalletOperations.CanTransferOut(arg0, arg1, arg2, arg3);
          }
 
          // -= Unsupported Operation! =-
@@ -217,16 +215,42 @@ namespace HubContract {
          return true;
       }
 
-      public static byte[] ArrayReverse(byte[] input) {
-         //byte[] reversed = input.Take(input.Length);
-         byte[] reversed = Constants.EmptyBytes;
-         int index;
-         for (int i = 0; i < input.Length; i++) {
-            //reversed[i] = input[input.Length - 1 - i];  <- puts the VM in a FAULT state
-            index = input.Length - 1 - i;
-            reversed = reversed.Concat(Constants.Bytes[input[index]]);
-         }
-         return reversed;
+      public static byte[] ReverseScriptHash(byte[] input) {
+         byte[] rev = new byte[20];
+         byte tmp = input[0];
+         input[0] = input[input.Length - 0 - 1];
+         input[input.Length - 0 - 1] = tmp;
+         tmp = input[1];
+         input[1] = input[input.Length - 1 - 1];
+         input[input.Length - 1 - 1] = tmp;
+         tmp = input[2];
+         input[2] = input[input.Length - 2 - 1];
+         input[input.Length - 2 - 1] = tmp;
+         tmp = input[3];
+         input[3] = input[input.Length - 3 - 1];
+         input[input.Length - 3 - 1] = tmp;
+         tmp = input[4];
+         input[4] = input[input.Length - 4 - 1];
+         input[input.Length - 4 - 1] = tmp;
+         tmp = input[5];
+         input[5] = input[input.Length - 5 - 1];
+         input[input.Length - 5 - 1] = tmp;
+         tmp = input[6];
+         input[6] = input[input.Length - 6 - 1];
+         input[input.Length - 6 - 1] = tmp;
+         tmp = input[7];
+         input[7] = input[input.Length - 7 - 1];
+         input[input.Length - 7 - 1] = tmp;
+         tmp = input[8];
+         input[8] = input[input.Length - 8 - 1];
+         input[input.Length - 8 - 1] = tmp;
+         tmp = input[9];
+         input[9] = input[input.Length - 9 - 1];
+         input[input.Length - 9 - 1] = tmp;
+         tmp = input[10];
+         input[10] = input[input.Length - 10 - 1];
+         input[input.Length - 10 - 1] = tmp;
+         return rev;
       }
    }
 }
