@@ -37,6 +37,7 @@ namespace HubContract {
          84, 197, 107, 108, 118, 107, 0, 82, 122, 196, 97, 104, 22, 78, 101, 111,
          46, 82, 117, 110, 116, 105, 109, 101, 46, 71, 101, 116, 84, 114, 105, 103,
          103, 101, 114, 100, 8, 0, 0, 97, 108, 117, 102, 33
+         // ... public key goes here ...
       };
 
       // Between the public key and script hash
@@ -54,6 +55,7 @@ namespace HubContract {
          9, 114, 101, 113, 117, 101, 115, 116, 116, 120, 84, 197, 118, 0, 108, 118, 107,
          0, 195, 196, 118, 81, 108, 118, 107, 81, 195, 196, 118, 82, 108, 118, 107, 83,
          195, 196, 118, 83, 108, 118, 107, 82, 195, 196, 97, 124, 103
+         // ... hub script hash goes here ...
       };
 
       // Everything after the script hash
@@ -84,13 +86,6 @@ namespace HubContract {
          108, 118, 107, 81, 195, 108, 118, 107, 82, 195, 81, 127, 156, 99, 8, 0, 0, 97, 108,
          117, 102, 108, 118, 107, 82, 195, 81, 147, 108, 118, 107, 82, 82, 122, 196, 108, 118,
          107, 82, 195, 108, 118, 107, 0, 195, 192, 159, 99, 197, 255, 81, 97, 108, 117, 102
-      };
-
-      // VM WORKAROUND
-      // Becuase the SETITEM opcode doesn't work with byte arrays, we can't make them on the fly.
-      public static readonly byte[] EmptyBytes = new byte[] { };
-      public static readonly byte[][] Bytes = new byte[][] {
-         new byte[] { 0 }, new byte[] { 1 }, new byte[] { 2 }, new byte[] { 3 }, new byte[] { 4 }, new byte[] { 5 }, new byte[] { 6 }, new byte[] { 7 }, new byte[] { 8 }, new byte[] { 9 }, new byte[] { 10 }, new byte[] { 11 }, new byte[] { 12 }, new byte[] { 13 }, new byte[] { 14 }, new byte[] { 15 }, new byte[] { 16 }, new byte[] { 17 }, new byte[] { 18 }, new byte[] { 19 }, new byte[] { 20 }, new byte[] { 21 }, new byte[] { 22 }, new byte[] { 23 }, new byte[] { 24 }, new byte[] { 25 }, new byte[] { 26 }, new byte[] { 27 }, new byte[] { 28 }, new byte[] { 29 }, new byte[] { 30 }, new byte[] { 31 }, new byte[] { 32 }, new byte[] { 33 }, new byte[] { 34 }, new byte[] { 35 }, new byte[] { 36 }, new byte[] { 37 }, new byte[] { 38 }, new byte[] { 39 }, new byte[] { 40 }, new byte[] { 41 }, new byte[] { 42 }, new byte[] { 43 }, new byte[] { 44 }, new byte[] { 45 }, new byte[] { 46 }, new byte[] { 47 }, new byte[] { 48 }, new byte[] { 49 }, new byte[] { 50 }, new byte[] { 51 }, new byte[] { 52 }, new byte[] { 53 }, new byte[] { 54 }, new byte[] { 55 }, new byte[] { 56 }, new byte[] { 57 }, new byte[] { 58 }, new byte[] { 59 }, new byte[] { 60 }, new byte[] { 61 }, new byte[] { 62 }, new byte[] { 63 }, new byte[] { 64 }, new byte[] { 65 }, new byte[] { 66 }, new byte[] { 67 }, new byte[] { 68 }, new byte[] { 69 }, new byte[] { 70 }, new byte[] { 71 }, new byte[] { 72 }, new byte[] { 73 }, new byte[] { 74 }, new byte[] { 75 }, new byte[] { 76 }, new byte[] { 77 }, new byte[] { 78 }, new byte[] { 79 }, new byte[] { 80 }, new byte[] { 81 }, new byte[] { 82 }, new byte[] { 83 }, new byte[] { 84 }, new byte[] { 85 }, new byte[] { 86 }, new byte[] { 87 }, new byte[] { 88 }, new byte[] { 89 }, new byte[] { 90 }, new byte[] { 91 }, new byte[] { 92 }, new byte[] { 93 }, new byte[] { 94 }, new byte[] { 95 }, new byte[] { 96 }, new byte[] { 97 }, new byte[] { 98 }, new byte[] { 99 }, new byte[] { 100 }, new byte[] { 101 }, new byte[] { 102 }, new byte[] { 103 }, new byte[] { 104 }, new byte[] { 105 }, new byte[] { 106 }, new byte[] { 107 }, new byte[] { 108 }, new byte[] { 109 }, new byte[] { 110 }, new byte[] { 111 }, new byte[] { 112 }, new byte[] { 113 }, new byte[] { 114 }, new byte[] { 115 }, new byte[] { 116 }, new byte[] { 117 }, new byte[] { 118 }, new byte[] { 119 }, new byte[] { 120 }, new byte[] { 121 }, new byte[] { 122 }, new byte[] { 123 }, new byte[] { 124 }, new byte[] { 125 }, new byte[] { 126 }, new byte[] { 127 }, new byte[] { 128 }, new byte[] { 129 }, new byte[] { 130 }, new byte[] { 131 }, new byte[] { 132 }, new byte[] { 133 }, new byte[] { 134 }, new byte[] { 135 }, new byte[] { 136 }, new byte[] { 137 }, new byte[] { 138 }, new byte[] { 139 }, new byte[] { 140 }, new byte[] { 141 }, new byte[] { 142 }, new byte[] { 143 }, new byte[] { 144 }, new byte[] { 145 }, new byte[] { 146 }, new byte[] { 147 }, new byte[] { 148 }, new byte[] { 149 }, new byte[] { 150 }, new byte[] { 151 }, new byte[] { 152 }, new byte[] { 153 }, new byte[] { 154 }, new byte[] { 155 }, new byte[] { 156 }, new byte[] { 157 }, new byte[] { 158 }, new byte[] { 159 }, new byte[] { 160 }, new byte[] { 161 }, new byte[] { 162 }, new byte[] { 163 }, new byte[] { 164 }, new byte[] { 165 }, new byte[] { 166 }, new byte[] { 167 }, new byte[] { 168 }, new byte[] { 169 }, new byte[] { 170 }, new byte[] { 171 }, new byte[] { 172 }, new byte[] { 173 }, new byte[] { 174 }, new byte[] { 175 }, new byte[] { 176 }, new byte[] { 177 }, new byte[] { 178 }, new byte[] { 179 }, new byte[] { 180 }, new byte[] { 181 }, new byte[] { 182 }, new byte[] { 183 }, new byte[] { 184 }, new byte[] { 185 }, new byte[] { 186 }, new byte[] { 187 }, new byte[] { 188 }, new byte[] { 189 }, new byte[] { 190 }, new byte[] { 191 }, new byte[] { 192 }, new byte[] { 193 }, new byte[] { 194 }, new byte[] { 195 }, new byte[] { 196 }, new byte[] { 197 }, new byte[] { 198 }, new byte[] { 199 }, new byte[] { 200 }, new byte[] { 201 }, new byte[] { 202 }, new byte[] { 203 }, new byte[] { 204 }, new byte[] { 205 }, new byte[] { 206 }, new byte[] { 207 }, new byte[] { 208 }, new byte[] { 209 }, new byte[] { 210 }, new byte[] { 211 }, new byte[] { 212 }, new byte[] { 213 }, new byte[] { 214 }, new byte[] { 215 }, new byte[] { 216 }, new byte[] { 217 }, new byte[] { 218 }, new byte[] { 219 }, new byte[] { 220 }, new byte[] { 221 }, new byte[] { 222 }, new byte[] { 223 }, new byte[] { 224 }, new byte[] { 225 }, new byte[] { 226 }, new byte[] { 227 }, new byte[] { 228 }, new byte[] { 229 }, new byte[] { 230 }, new byte[] { 231 }, new byte[] { 232 }, new byte[] { 233 }, new byte[] { 234 }, new byte[] { 235 }, new byte[] { 236 }, new byte[] { 237 }, new byte[] { 238 }, new byte[] { 239 }, new byte[] { 240 }, new byte[] { 241 }, new byte[] { 242 }, new byte[] { 243 }, new byte[] { 244 }, new byte[] { 245 }, new byte[] { 246 }, new byte[] { 247 }, new byte[] { 248 }, new byte[] { 249 }, new byte[] { 250 }, new byte[] { 251 }, new byte[] { 252 }, new byte[] { 253 }, new byte[] { 254 }, new byte[] { 255 }
       };
    }
 
@@ -133,7 +128,7 @@ namespace HubContract {
       
       public static bool ValidateWallet(byte[] scriptHash, byte[] pubKey, bool doThrow = false) {
          // This is cheaper than the Blockchain.GetContract method of getting the entire script
-         byte[] reversedScriptHash = Utils.ArrayReverse(scriptHash);
+         byte[] reversedScriptHash = Utils.ReverseHash160(scriptHash);
          byte[] expectedScript = 
                Constants.WalletScriptP1
                   .Concat(pubKey)
@@ -153,7 +148,7 @@ namespace HubContract {
       public static BigInteger GetBalance(byte[] scriptHash) {
          byte[] gasAssetId = Constants.GasAssetId;
          Account account = Blockchain.GetAccount(
-                              Utils.ArrayReverse(scriptHash));
+                              Utils.ReverseHash160(scriptHash));
          return account.GetBalance(gasAssetId);
       }
 
@@ -175,29 +170,28 @@ namespace HubContract {
    }
 
    public class Contract : SmartContract {
-      public static object Main(string operation, params object[] args) {
+      //public static object Main(string operation, params object[] args) {
+      public static object Main(string operation, byte[] arg0, byte[] arg1, byte[] arg2, BigInteger arg3) {
          //if (! Runtime.CheckWitness(originator)) return false;
-         
+
          //Runtime.Notify("BigInteger Size", Constants.BigIntSize());
 
          // -= Test Entry Points =-
          switch (operation) {
-            case "test_arrayreverse":
-               //return Utils.ArrayReverse((byte[])args[0]);
-               return new byte[] { 5, 4, 3, 2, 1 };
+            case "test_hash160reverse":
+               return Utils.ReverseHash160(arg0);
          }
          
          // -= Wallets =-
          switch (operation) {
-            case "validate": 
-               return WalletOperations.ValidateWallet((byte[])args[0], (byte[])args[1]);
-            case "getbalance": 
-               return WalletOperations.GetBalance((byte[])args[0]);
-            case "getreserved": 
-               return WalletOperations.GetReserved((byte[])args[0], (byte[])args[1]);
-            case "requesttx": 
-               return WalletOperations.CanTransferOut((byte[])args[0], 
-                        (byte[])args[1], (byte[])args[2], (BigInteger)args[3]);
+            case "validate":
+               return WalletOperations.ValidateWallet(arg0, arg1);
+            case "getbalance":
+               return WalletOperations.GetBalance(arg0);
+            case "getreserved":
+               return WalletOperations.GetReserved(arg0, arg1);
+            case "requesttx":
+               return WalletOperations.CanTransferOut(arg0, arg1, arg2, arg3);
          }
 
          // -= Unsupported Operation! =-
@@ -217,16 +211,33 @@ namespace HubContract {
          return true;
       }
 
-      public static byte[] ArrayReverse(byte[] input) {
-         //byte[] reversed = input.Take(input.Length);
-         byte[] reversed = Constants.EmptyBytes;
-         int index;
-         for (int i = 0; i < input.Length; i++) {
-            //reversed[i] = input[input.Length - 1 - i];  <- puts the VM in a FAULT state
-            index = input.Length - 1 - i;
-            reversed = reversed.Concat(Constants.Bytes[input[index]]);
-         }
-         return reversed;
+      public static byte[] ReverseHash160(byte[] hash) {
+         string input = hash.AsString();
+         string reversed = "";
+         // This triggers an InvalidOperationException at runtime:
+         // for (var i = 0; i < input.Length; i++)
+         //    reversed = input[i] + reversed;
+         reversed = input[0] + reversed;
+         reversed = input[1] + reversed;
+         reversed = input[2] + reversed;
+         reversed = input[3] + reversed;
+         reversed = input[4] + reversed;
+         reversed = input[5] + reversed;
+         reversed = input[6] + reversed;
+         reversed = input[7] + reversed;
+         reversed = input[8] + reversed;
+         reversed = input[9] + reversed;
+         reversed = input[10] + reversed;
+         reversed = input[11] + reversed;
+         reversed = input[12] + reversed;
+         reversed = input[13] + reversed;
+         reversed = input[14] + reversed;
+         reversed = input[15] + reversed;
+         reversed = input[16] + reversed;
+         reversed = input[17] + reversed;
+         reversed = input[18] + reversed;
+         reversed = input[19] + reversed;
+         return reversed.AsByteArray();
       }
    }
 }
