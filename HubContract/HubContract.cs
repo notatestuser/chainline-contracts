@@ -177,19 +177,19 @@ namespace HubContract {
          // -= Test Entry Points =-
          if ("test_hash160reverse" == operation)
             return Utils.ReverseHash160(arg0);
-         if ("test_sanity_bytearrayeq" == operation)
-            return arg0 == arg1;
-         if ("test_sanity_bytearrayneq" == operation)
-            return arg0 != arg1;
+         else if ("test_sanity_bytearrayeq" == operation)
+            return Utils.ArraysEqual(arg0, arg1);
+         else if ("test_sanity_bytearrayneq" == operation)
+            return ! Utils.ArraysEqual(arg0, arg1);
          
          // -= Wallets =-
-         if ("validate" == operation)
+         else if ("validate" == operation)
             return WalletOperations.ValidateWallet(arg0, arg1);
-         if ("getbalance" == operation)
+         else if ("getbalance" == operation)
             return WalletOperations.GetBalance(arg0);
-         if ("getreserved" == operation)
+         else if ("getreserved" == operation)
             return WalletOperations.GetReserved(arg0, arg1);
-         if ("requesttx" == operation)
+         else if ("requesttx" == operation)
             return WalletOperations.CanTransferOut(arg0, arg1, arg2, arg3);
 
          // -= Unsupported Operation! =-

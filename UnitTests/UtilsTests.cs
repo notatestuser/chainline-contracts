@@ -28,7 +28,7 @@ namespace UtilsTests {
          }
 
          engine.Execute();
-         Assert.False(engine.State == VMState.FAULT);
+         Assert.False(engine.State == VMState.FAULT, "FAULT");
 
          byte[] result = engine.EvaluationStack.Peek().GetByteArray();
          byte[] reversedScriptHash = (byte[])SCRIPT_HASH.Clone();
