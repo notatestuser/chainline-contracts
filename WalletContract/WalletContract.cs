@@ -19,9 +19,9 @@ namespace WalletContract {
       // Converter: https://conv.darkbyte.ru
       // neowallet_contracts13.db3
       public static readonly byte[] OwnerPubKey = {
-         3, 114, 247, 98, 137, 198, 155, 181, 138, 142, 92, 125, 43, 79, 
-         21, 38, 234, 139, 38, 192, 131, 178, 169, 88, 194, 30, 188, 3, 25, 
-         110, 0, 188, 192
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+         0, 0, 0, 0
       };
 
       // GAS asset ID
@@ -35,9 +35,8 @@ namespace WalletContract {
 
    public class Externals {
       // Represents the instance of Chain Line's HubContract on the network
-      // Current version: 0.8 (30a2b04139d714564eb956896498616cf8acc8db)
-      [Appcall(new byte[] { 48, 162, 176, 65, 57, 215, 20, 86, 78, 185, 86,
-         137, 100, 152, 97, 108, 248, 172, 200, 219 })]  // reversed by the compiler
+      // Current version: TEST (6def5203f34e60d5e19dcd0f79e4d18a668e9b6d)
+      [Appcall("25267cc4a0fb2fad5f66e329c5af296748a4a4e0")]  // reversed by the compiler
       public static extern bool HubContract(string operation, params object[] args);
    }
 
@@ -60,7 +59,9 @@ namespace WalletContract {
          TransactionOutput reference = tx.GetReferences()[0];
          byte[] assetId = reference.AssetId;
 
+         //return Externals.HubContract("requesttx", signature, pubKey, assetId, txValue);
          return Externals.HubContract("requesttx", signature, pubKey, assetId, txValue);
+         return true;
       }
 
       private static BigInteger GetTransactionValue(byte[] signature) {

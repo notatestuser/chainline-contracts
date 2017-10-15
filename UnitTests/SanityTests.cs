@@ -14,8 +14,8 @@ namespace UnitTests {
 
          using (ScriptBuilder sb = new ScriptBuilder())
          {
-            sb.EmitPush(0);  // arg3
-            sb.EmitPush(new byte[] { });  // arg2
+            //sb.EmitPush(0);  // arg3
+            //sb.EmitPush(new byte[] { });  // arg2
             sb.EmitPush(new byte[] { 1, 2, 3, 4, 5 });  // arg1
             sb.EmitPush(new byte[] { 1, 2, 3, 4, 5 });  // arg0
             sb.EmitPush("test_sanity_bytearrayeq");  // operation
@@ -38,8 +38,8 @@ namespace UnitTests {
 
          using (ScriptBuilder sb = new ScriptBuilder())
          {
-            sb.EmitPush(0);  // arg3
-            sb.EmitPush(new byte[] { });  // arg2
+            //sb.EmitPush(0);  // arg3
+            //b.EmitPush(new byte[] { });  // arg2
             sb.EmitPush(new byte[] { 5, 4, 3, 2, 1 });  // arg1
             sb.EmitPush(new byte[] { 1, 2, 3, 4, 5 });  // arg0
             sb.EmitPush("test_sanity_bytearrayeq");  // operation
@@ -63,8 +63,8 @@ namespace UnitTests {
 
          using (ScriptBuilder sb = new ScriptBuilder())
          {
-            sb.EmitPush(0);  // arg3
-            sb.EmitPush(new byte[] { });  // arg2
+            //sb.EmitPush(0);  // arg3
+            //sb.EmitPush(new byte[] { });  // arg2
             sb.EmitPush(new byte[] { 5, 4, 3, 2, 1 });  // arg1
             sb.EmitPush(new byte[] { 1, 2, 3, 4, 5 });  // arg0
             sb.EmitPush("test_sanity_bytearrayneq");  // operation
@@ -87,8 +87,8 @@ namespace UnitTests {
 
          using (ScriptBuilder sb = new ScriptBuilder())
          {
-            sb.EmitPush(0);  // arg3
-            sb.EmitPush(new byte[] { });  // arg2
+            //sb.EmitPush(0);  // arg3
+            //sb.EmitPush(new byte[] { });  // arg2
             sb.EmitPush(new byte[] { 1, 2, 3, 4, 5 });  // arg1
             sb.EmitPush(new byte[] { 1, 2, 3, 4, 5 });  // arg0
             sb.EmitPush("test_sanity_bytearrayneq");  // operation

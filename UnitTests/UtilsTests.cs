@@ -18,8 +18,8 @@ namespace UtilsTests {
 
          using (ScriptBuilder sb = new ScriptBuilder())
          {
-            sb.EmitPush(0);  // arg3
-            sb.EmitPush(new byte[] { });  // arg2
+            //sb.EmitPush(0);  // arg3
+            //sb.EmitPush(new byte[] { });  // arg2
             sb.EmitPush(new byte[] { });  // arg1
             sb.EmitPush(SCRIPT_HASH);  // arg0
             sb.EmitPush("test_hash160reverse");  // operation

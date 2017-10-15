@@ -136,7 +136,7 @@ namespace HubContract {
                   .Concat(reversedScriptHash)
                   .Concat(Constants.WalletScriptP3);
          byte[] expectedHash = Hash160(expectedScript);
-         if (! Utils.ArraysEqual(expectedHash, scriptHash)) {
+         if (expectedHash != scriptHash) {
             Events.RaiseException("InvalidWallet");
             if (doThrow) throw new Exception("This is not a valid Chain Line user wallet.");
             return false;
@@ -171,26 +171,26 @@ namespace HubContract {
 
    public class Contract : SmartContract {
       //public static object Main(string operation, params object[] args) {
-      public static object Main(string operation, byte[] arg0, byte[] arg1, byte[] arg2, BigInteger arg3) {
+      public static object Main(string operation, byte[] arg0, byte[] arg1) {
          //if (! Runtime.CheckWitness(originator)) return false;
 
          // -= Test Entry Points =-
-         if ("test_hash160reverse" == operation)
+         if (operation == "test_hash160reverse")
             return Utils.ReverseHash160(arg0);
-         else if ("test_sanity_bytearrayeq" == operation)
-            return Utils.ArraysEqual(arg0, arg1);
-         else if ("test_sanity_bytearrayneq" == operation)
-            return ! Utils.ArraysEqual(arg0, arg1);
+         if (operation == "test_sanity_bytearrayeq")
+            return arg0 == arg1;
+         if (operation == "test_sanity_bytearrayneq")
+            return arg0 != arg1;
          
          // -= Wallets =-
-         else if ("validate" == operation)
-            return WalletOperations.ValidateWallet(arg0, arg1);
-         else if ("getbalance" == operation)
-            return WalletOperations.GetBalance(arg0);
-         else if ("getreserved" == operation)
-            return WalletOperations.GetReserved(arg0, arg1);
-         else if ("requesttx" == operation)
-            return WalletOperations.CanTransferOut(arg0, arg1, arg2, arg3);
+         //else if ("validate" == operation)
+         //   return WalletOperations.ValidateWallet(arg0, arg1);
+         //else if ("getbalance" == operation)
+         //   return WalletOperations.GetBalance(arg0);
+         //else if ("getreserved" == operation)
+         //   return WalletOperations.GetReserved(arg0, arg1);
+         //else if ("requesttx" == operation)
+         //   return WalletOperations.CanTransferOut(arg0, arg1, arg2, arg3);
 
          // -= Unsupported Operation! =-
          Events.RaiseException("Unsupported Operation");
@@ -200,15 +200,6 @@ namespace HubContract {
    }
    
    public class Utils {
-      public static bool ArraysEqual(byte[] a1, byte[] a2) {
-         if (a1.Length != a2.Length)
-            return false;
-         for (int i = 0; i < a1.Length; i++)
-            if (a1[i] != a2[i])
-               return false;
-         return true;
-      }
-
       public static byte[] ReverseHash160(byte[] hash) {
          string input = hash.AsString();
          string reversed = "";
